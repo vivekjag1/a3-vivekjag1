@@ -19,6 +19,10 @@ import {Schema, model} from 'mongoose';
     cashOnHand:{ 
         type:Number, 
         required:true
+    }, 
+    affordable:{ 
+        type:Boolean, 
+        required:true, 
     }
 }); 
 const PurchaseItem = model('PurchaseItem', purchaseSchema); 
