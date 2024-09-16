@@ -8,6 +8,7 @@ import addPurchase from "./routes/addPurchase.js";
 import deletePurchase from "./routes/deletePurchase.js"; 
 import getResults from "./routes/getResults.js"; 
 import updatePurchase from "./routes/updatePurchase.js"; 
+import deleteAll from "./routes/deleteAll.js"; 
 //start dotenv
 import dotenv from 'dotenv'; 
 dotenv.config(); 
@@ -18,6 +19,7 @@ mongoose.connect(process.env.ATLAS_URI);
 import express from 'express'; 
 const app = express(); 
 app.use(express.static('public')); 
+app.use(express.json()); 
 //middleware for post requests so that requests have a body with the incoming data
 const postMiddleware = (req, res, next) => { 
     const dataArr = []; 
@@ -27,24 +29,30 @@ const postMiddleware = (req, res, next) => {
 
     }); 
     req.on('end', () => { 
-        console.log("d", dataString); 
+        
+        console.log(dataString);
         const json = JSON.parse(dataString); 
         dataArr.push(json); 
         req.body = JSON.stringify(json); 
         next(); 
     })
 }
-app.use(postMiddleware); 
+
 //basic route used to test API and MongoDB atlas health
 app.get('/', async (req, res) =>{
     res.send('Hello'); 
     const test = await PurchaseItem.countDocuments({}); 
-    console.log('test is', test); 
 }); 
 //attach routes
+
+//gets first
 app.use(exampleRoute); 
+app.use(getResults); 
+app.use(deleteAll); 
+
+app.use(postMiddleware); 
+
 app.use(addPurchase); 
 app.use(deletePurchase); 
-app.use(getResults); 
 app.use(updatePurchase); 
 app.listen(process.env.PORT || 3000); 

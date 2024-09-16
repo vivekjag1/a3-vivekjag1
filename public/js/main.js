@@ -1,5 +1,4 @@
 const handleSubmit = async(title, type, store, price, coh) => { 
-    console.log("I hate this!"); 
     const body = JSON.stringify({ 
       "title": title, 
       "category": type, 
@@ -7,15 +6,16 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": price, 
       "cashOnHand": coh
     }); 
-     await fetch('/addPurchase', {
+     const getResults = await(await fetch('/addPurchase', {
       method: 'POST', 
       body
-    }); 
-    const getResults = await fetch('/getResults', { 
-      method:'GET'
-    }); 
-    console.log("the results are", getResults); 
-    return (await getResults.json())
+    })).json(); 
+
+    console.log(getResults); 
+    
+    buildTable(getResults["data"], 'dummy'); 
+   
+
   
     
     
@@ -75,7 +75,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const store = item['store']; 
     const price = item['price']; 
     const cashOnHand = item['cashOnHand']; 
-    const affoardable = item['affoardable?']; 
+    const affordable = item['affordable']; 
     const resultsTable = document.getElementById('resultsTable'); 
   
     
@@ -99,7 +99,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
        const cohHeader = document.createElement('th'); 
        cohHeader.innerHTML = 'Cash On Hand'
        const affoardableHeader=document.createElement('th'); 
-       affoardableHeader.innerHTML = 'Affoardable?'; 
+       affoardableHeader.innerHTML = 'Affordable?'; 
        const editHeader = document.createElement('th'); 
        editHeader.innerHTML = 'edit/delete'
        headers.appendChild(purchaseHeader); 
@@ -121,7 +121,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
         const resultCOH =  document.createElement('td');
         resultCOH.innerHTML = cashOnHand; 
         const resultAffoardable = document.createElement('td'); 
-        resultAffoardable.innerHTML = affoardable; 
+        resultAffoardable.innerHTML = affordable; 
         const editButton = document.createElement('button'); 
         editButton.innerHTML = 'update Item'; 
         const deleteButton = document.createElement('button');
