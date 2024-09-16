@@ -12,12 +12,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     })).json(); 
     buildTable(getResults["data"], 'dummy'); 
   }
-  const getAllItems = async () => {
-    const data = await fetch('/getResults', {
-      method: "GET"
-    }); 
-    return (await data.json()); 
-  }
+
   
   const handleDelete = async (title) => {
     
@@ -43,13 +38,12 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": newPrice, 
       "cashOnHand": newCoh
     }); 
-    const makeRequest = await fetch('/updatePurchase', {
+    const makeRequest = await(await fetch('/updatePurchase', {
       method: 'POST', 
       body
-    }); 
-    const getResults = await fetch('/getResults', { 
-      method:'GET'
-    }); 
+    })).json(); 
+    buildTable(makeRequest["data"], 'dummy'); 
+
     return (await getResults.json()); 
   
   
@@ -166,10 +160,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     handleUpdate(oldTitle, newtitle, newType, newStore, newPrice, newCoh); 
     oldTitle = newtitle; 
     const updatedArr = []; 
-    getAllItems().then((res) => {
-      buildTable(res, 'update'); 
-  
-    })
+   
    
     modal.close(); 
     }); 
