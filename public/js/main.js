@@ -6,24 +6,13 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": price, 
       "cashOnHand": coh
     }); 
-     await fetch('/api/createPurchase', {
+     const getResults = await(await fetch('/addPurchase', {
       method: 'POST', 
       body
-    }); 
-    const getResults = await fetch('/api/getResults', { 
-      method:'GET'
-    }); 
-    return (await getResults.json())
-  
-    
-    
+    })).json(); 
+    buildTable(getResults["data"], 'dummy'); 
   }
-  const getAllItems = async () => {
-    const data = await fetch('/api/getResults', {
-      method: "GET"
-    }); 
-    return (await data.json()); 
-  }
+
   
   const handleDelete = async (title) => {
     
@@ -31,15 +20,13 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const body = JSON.stringify({
       "title": title
     }); 
-    await fetch('/api/deletePurchase', {
+    const data = await(await fetch('/deletePurchase', {
       method: 'POST', 
       body
-    }); 
+    })).json(); 
+    buildTable(data["data"], "dummy");
   
-    getAllItems().then((res) => {
-      buildTable(res, 'delete'); 
-  
-    })
+
     modal.close(); 
   }
   const handleUpdate = async (title, newTitle, newType, newStore, newPrice, newCoh) => { 
@@ -51,13 +38,12 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": newPrice, 
       "cashOnHand": newCoh
     }); 
-    const makeRequest = await fetch('/api/updatePurchase', {
+    const makeRequest = await(await fetch('/updatePurchase', {
       method: 'POST', 
       body
-    }); 
-    const getResults = await fetch('/api/getResults', { 
-      method:'GET'
-    }); 
+    })).json(); 
+    buildTable(makeRequest["data"], 'dummy'); 
+
     return (await getResults.json()); 
   
   
@@ -73,7 +59,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const store = item['store']; 
     const price = item['price']; 
     const cashOnHand = item['cashOnHand']; 
-    const affoardable = item['affoardable?']; 
+    const affordable = item['affordable']; 
     const resultsTable = document.getElementById('resultsTable'); 
   
     
@@ -97,7 +83,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
        const cohHeader = document.createElement('th'); 
        cohHeader.innerHTML = 'Cash On Hand'
        const affoardableHeader=document.createElement('th'); 
-       affoardableHeader.innerHTML = 'Affoardable?'; 
+       affoardableHeader.innerHTML = 'Affordable?'; 
        const editHeader = document.createElement('th'); 
        editHeader.innerHTML = 'edit/delete'
        headers.appendChild(purchaseHeader); 
@@ -119,7 +105,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
         const resultCOH =  document.createElement('td');
         resultCOH.innerHTML = cashOnHand; 
         const resultAffoardable = document.createElement('td'); 
-        resultAffoardable.innerHTML = affoardable; 
+        resultAffoardable.innerHTML = affordable; 
         const editButton = document.createElement('button'); 
         editButton.innerHTML = 'update Item'; 
         const deleteButton = document.createElement('button');
@@ -174,10 +160,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     handleUpdate(oldTitle, newtitle, newType, newStore, newPrice, newCoh); 
     oldTitle = newtitle; 
     const updatedArr = []; 
-    getAllItems().then((res) => {
-      buildTable(res, 'update'); 
-  
-    })
+   
    
     modal.close(); 
     }); 
@@ -197,9 +180,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
       const coh = document.getElementById('coh').value; 
   
       
-      form.onsubmit=  handleSubmit(title, type, store, price, coh ).then((res) => { 
-        buildTable(res, 'create'); 
-    }); 
+      form.onsubmit=  handleSubmit(title, type, store, price, coh ).then(); 
   
      }); 
   }

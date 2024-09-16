@@ -5,15 +5,15 @@ const router = express.Router();
 import { isInBudget } from '../utils/isInBudget.js';
 
 
-router.post('/addPurchase', (req, res) =>{ 
-    console.log(typeof(req.body)); 
+router.post('/addPurchase', async (req, res) =>{ 
     const body = JSON.parse(req.body); 
     const affordable = isInBudget(body); 
-    console.log(affordable); 
     body.affordable = affordable; 
 
 
-    PurchaseItem.create((body)); 
-    console.log(req.body); 
+    await PurchaseItem.create((body)); 
+    const toSend = await PurchaseItem.find({}); 
+    res.json({"data": toSend}); 
+  
 }); 
 export default router; 
