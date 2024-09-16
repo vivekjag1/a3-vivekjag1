@@ -1,7 +1,34 @@
-require('dotenv').config(); 
-const mongoose = require('mongoose'); 
+//require .env library and mongoose
+import PurchaseItem from "./mongoose/purchases/schema.js"; 
+
+import dotenv from 'dotenv'; 
+dotenv.config(); 
+import { mongoose } from 'mongoose';
 
 mongoose.connect(process.env.ATLAS_URI); 
+
+
+
+import express from 'express'; 
+const app = express(); 
+
+const logger = (req, res, next) =>{ 
+    console.log('url', req.url); 
+    next(); 
+}
+
+app.use(logger); 
+app.get('/', async (req, res) =>{
+    res.send('Hello'); 
+    const test = await PurchaseItem.countDocuments({}); 
+    console.log('test is', test); 
+    
+} 
+
+
+); 
+
+app.listen(process.env.PORT || 3002); 
 
 
 

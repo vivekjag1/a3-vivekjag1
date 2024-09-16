@@ -1,5 +1,5 @@
-import {Schema, model, InferSchemaType} from "mongoose"; 
-export const purchaseSchema = new Schema<PurchaseItem>({
+import {Schema, model} from 'mongoose';  
+ const purchaseSchema = new Schema({
     title: {
         type: String, 
         required:true
@@ -21,4 +21,5 @@ export const purchaseSchema = new Schema<PurchaseItem>({
         required:true
     }
 }); 
-export const PurchaseItem = mongoose.model('PurchaseItem', purchaseSchema); 
+const PurchaseItem = model('PurchaseItem', purchaseSchema); 
+ export default PurchaseItem; 
