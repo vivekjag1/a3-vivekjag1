@@ -10,15 +10,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
       method: 'POST', 
       body
     })).json(); 
-
-    console.log(getResults); 
-    
     buildTable(getResults["data"], 'dummy'); 
-   
-
-  
-    
-    
   }
   const getAllItems = async () => {
     const data = await fetch('/getResults', {
@@ -33,15 +25,13 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const body = JSON.stringify({
       "title": title
     }); 
-    await fetch('/deletePurchase', {
+    const data = await(await fetch('/deletePurchase', {
       method: 'POST', 
       body
-    }); 
+    })).json(); 
+    buildTable(data["data"], "dummy");
   
-    getAllItems().then((res) => {
-      buildTable(res, 'delete'); 
-  
-    })
+
     modal.close(); 
   }
   const handleUpdate = async (title, newTitle, newType, newStore, newPrice, newCoh) => { 

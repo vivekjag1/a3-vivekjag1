@@ -30,7 +30,6 @@ const postMiddleware = (req, res, next) => {
     }); 
     req.on('end', () => { 
         
-        console.log(dataString);
         const json = JSON.parse(dataString); 
         dataArr.push(json); 
         req.body = JSON.stringify(json); 
