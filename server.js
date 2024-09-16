@@ -14,9 +14,27 @@ import express from 'express';
 const app = express(); 
 app.use(express.static('public')); 
 
+const postMiddleware = (req, res, next) => { 
+    const dataArr = []; 
+    let dataString = ''; 
+    req.on('data', (data) =>{ 
+        dataString += data; 
+
+    }); 
+    req.on('end', () => { 
+        const json = JSON.parse(dataString); 
+        dataArr.push(json); 
+        req.body = JSON.stringify(json); 
+        next(); 
+    })
+}
+app.use(postMiddleware); 
+
+
 
 app.get('/', async (req, res) =>{
     res.send('Hello'); 
+    
     const test = await PurchaseItem.countDocuments({}); 
     console.log('test is', test); 
     
