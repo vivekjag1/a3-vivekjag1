@@ -6,6 +6,7 @@ Note -> all express routes are written in the routes directory. This file only s
 import PurchaseItem from "./mongoose/purchases/schema.js"; 
 import exampleRoute from "./routes/exampleRoute.js"; 
 import addPurchase from "./routes/addPurchase.js"; 
+import deletePurchase from "./routes/deletePurchase.js"; 
 import dotenv from 'dotenv'; 
 dotenv.config(); 
 import { mongoose } from 'mongoose';
@@ -42,6 +43,7 @@ app.get('/', async (req, res) =>{
 
 app.use(exampleRoute); 
 app.use(addPurchase); 
+app.use(deletePurchase); 
 
 
 
@@ -75,30 +77,7 @@ app.listen(process.env.PORT || 3000);
 // */ 
 
 
-// const isInBudget = (aPurchase) => { 
-//   //for the purposes of this assignment, a purchase is in budget if it is 15% or less of the cash on hand 
-//   const budget = aPurchase.cashOnHand * .15; 
-//   if(aPurchase.price > budget){
-//     return false; 
-//   }
-//   return true; 
 
-// }
-
-// const addPurchase = (aPurchase) => { 
-//   //create a new object with the derived field and to validate fields
-//   const addToServer = { 
-//     "title": aPurchase.title, 
-//     "category": aPurchase.category, 
-//     "store": aPurchase.store,  
-//     "price": aPurchase.price, 
-//     "cashOnHand": aPurchase.cashOnHand, 
-//     "affoardable?": isInBudget(aPurchase), 
-//   }; 
-//   //add to the server array 
-//   purchases.push(addToServer);
-//   //log array for debugging  
-// }
 
 // const handleGet = function( request, response ) {
 //   const filename = dir + request.url.slice( 1 ) 
