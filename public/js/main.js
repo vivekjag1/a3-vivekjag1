@@ -1,4 +1,5 @@
 const handleSubmit = async(title, type, store, price, coh) => { 
+    console.log("I hate this!"); 
     const body = JSON.stringify({ 
       "title": title, 
       "category": type, 
@@ -6,20 +7,21 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": price, 
       "cashOnHand": coh
     }); 
-     await fetch('/api/createPurchase', {
+     await fetch('/addPurchase', {
       method: 'POST', 
       body
     }); 
-    const getResults = await fetch('/api/getResults', { 
+    const getResults = await fetch('/getResults', { 
       method:'GET'
     }); 
+    console.log("the results are", getResults); 
     return (await getResults.json())
   
     
     
   }
   const getAllItems = async () => {
-    const data = await fetch('/api/getResults', {
+    const data = await fetch('/getResults', {
       method: "GET"
     }); 
     return (await data.json()); 
@@ -31,7 +33,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const body = JSON.stringify({
       "title": title
     }); 
-    await fetch('/api/deletePurchase', {
+    await fetch('/deletePurchase', {
       method: 'POST', 
       body
     }); 
@@ -51,11 +53,11 @@ const handleSubmit = async(title, type, store, price, coh) => {
       "price": newPrice, 
       "cashOnHand": newCoh
     }); 
-    const makeRequest = await fetch('/api/updatePurchase', {
+    const makeRequest = await fetch('/updatePurchase', {
       method: 'POST', 
       body
     }); 
-    const getResults = await fetch('/api/getResults', { 
+    const getResults = await fetch('/getResults', { 
       method:'GET'
     }); 
     return (await getResults.json()); 
@@ -197,9 +199,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
       const coh = document.getElementById('coh').value; 
   
       
-      form.onsubmit=  handleSubmit(title, type, store, price, coh ).then((res) => { 
-        buildTable(res, 'create'); 
-    }); 
+      form.onsubmit=  handleSubmit(title, type, store, price, coh ).then(); 
   
      }); 
   }
