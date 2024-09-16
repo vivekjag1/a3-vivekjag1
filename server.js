@@ -7,6 +7,7 @@ import PurchaseItem from "./mongoose/purchases/schema.js";
 import exampleRoute from "./routes/exampleRoute.js"; 
 import addPurchase from "./routes/addPurchase.js"; 
 import deletePurchase from "./routes/deletePurchase.js"; 
+import getResults from "./routes/getResults.js"; 
 import dotenv from 'dotenv'; 
 dotenv.config(); 
 import { mongoose } from 'mongoose';
@@ -44,6 +45,7 @@ app.get('/', async (req, res) =>{
 app.use(exampleRoute); 
 app.use(addPurchase); 
 app.use(deletePurchase); 
+app.use(getResults); 
 
 
 
