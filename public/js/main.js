@@ -152,7 +152,6 @@ const handleSubmit = async(title, type, store, price, coh) => {
     const buttonUpdate = document.getElementById('submitUpdates'); 
     const runClick = (event) => {
       event.preventDefault();
-      console.log("submission!"); 
               
       const newtitle = document.getElementById('updatetitle').value; 
       const newType = document.getElementById('updatetypes').value; 
