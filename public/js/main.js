@@ -44,7 +44,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
     })).json(); 
     buildTable(makeRequest["data"], 'dummy'); 
 
-    return (await getResults.json()); 
+   
   
   
   }
@@ -135,6 +135,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
   }
   const handleEditClick = (event, oldTitle, category, store, price, coh, ) => { 
     event.preventDefault(); 
+
     const modal = document.getElementById('deleteDialog'); 
     document.getElementById('updatetitle').value = oldTitle; 
     document.getElementById('updatetypes').value = category;
@@ -149,21 +150,29 @@ const handleSubmit = async(title, type, store, price, coh) => {
       modal.close(); 
     })
     const buttonUpdate = document.getElementById('submitUpdates'); 
-    buttonUpdate.addEventListener('click', (event) => {
-    event.preventDefault();
-            
-    const newtitle = document.getElementById('updatetitle').value; 
-    const newType = document.getElementById('updatetypes').value; 
-    const newStore =  document.getElementById('updatestore').value; 
-    const newPrice = document.getElementById('updateprice').value; 
-    const newCoh = document.getElementById('updatecoh').value; 
-    handleUpdate(oldTitle, newtitle, newType, newStore, newPrice, newCoh); 
-    oldTitle = newtitle; 
-    const updatedArr = []; 
+    const runClick = (event) => {
+      event.preventDefault();
+              
+      const newtitle = document.getElementById('updatetitle').value; 
+      const newType = document.getElementById('updatetypes').value; 
+      const newStore =  document.getElementById('updatestore').value; 
+      const newPrice = document.getElementById('updateprice').value; 
+      const newCoh = document.getElementById('updatecoh').value; 
+      handleUpdate(oldTitle, newtitle, newType, newStore, newPrice, newCoh); 
+      oldTitle = newtitle; 
+      const updatedArr = []; 
+     
+     
+      modal.close(); 
+      buttonUpdate.removeEventListener('click', runClick); 
+    }; 
+
+
+
+    
+    buttonUpdate.addEventListener('click', runClick) ; 
    
-   
-    modal.close(); 
-    }); 
+
   }
   
   
