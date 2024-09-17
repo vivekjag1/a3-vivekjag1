@@ -38,9 +38,8 @@ const postMiddleware = (req, res, next) => {
 }
 
 //basic route used to test API and MongoDB atlas health
-app.get('/', async (req, res) =>{
-    res.send('Hello'); 
-    const test = await PurchaseItem.countDocuments({}); 
+app.get('/:params', async (req, res) =>{
+    res.sendFile('/public/index.html'); 
 }); 
 //attach routes
 

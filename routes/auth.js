@@ -1,13 +1,7 @@
 import express, {Router} from 'express'; 
+import axios from 'axios'
 import PurchaseItem from '../mongoose/purchases/schema.js';
 const router = express.Router(); 
-
-
-// router.get('/auth', async (req, res) =>{ 
-//     res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GIT_CLIENT_ID}`)
-   
-// }); 
-
 router.get('/auth', async ({query:{code}}, res) =>{ 
     const body = { 
         client_id: process.env.GIT_CLIENT_ID, 
@@ -15,18 +9,18 @@ router.get('/auth', async ({query:{code}}, res) =>{
         code
     }; 
     const options = {headers:{accept:'application/json'}}
-    const token =  fetch('https://github.com/login/oauth/access_token', 
-        {
-            method:'POST', 
-            body, 
-            options
-        }
-     ).then((res) => res.data.access_token).then((token) => {
-        res.redirect(`/?token=${token}`)
-     })
-     
-     ; 
 
-})
+
+
+
+    console.log('here outside'); 
+    const token =  axios.post('https://github.com/login/oauth/access_token', body, options)
+    .then((res) => res.data.access_token).then((token) =>{ 
+        res.redirect(`/?token=${token}`)
+    }); 
+      
+    
+}); 
+
 
 export default router; 
