@@ -11,7 +11,7 @@ import updatePurchase from "./routes/updatePurchase.js";
 import deleteAll from "./routes/deleteAll.js"; 
 import cors from 'cors';
 
-
+console.log("here"); 
 
 
 
