@@ -194,7 +194,13 @@ const handleSubmit = async(title, type, store, price, coh) => {
   window.onload =  function() {
     makeInitialTable().then(); 
 
-
+    const logoutButton = document.getElementById('logoutButton'); 
+    logoutButton.addEventListener('click', async() => { 
+      await fetch('/auth/logout', { 
+        method:'GET'
+      }); 
+  
+    })
      const form = document.getElementById('budgetForm'); 
      form.addEventListener("submit", (event) => { 
       event.preventDefault(); 
