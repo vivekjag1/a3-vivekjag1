@@ -6,10 +6,11 @@ import { isInBudget } from '../utils/isInBudget.js';
 
 
 router.post('/addPurchase', async (req, res) =>{ 
+  
     const body = JSON.parse(req.body); 
     const affordable = isInBudget(body); 
     body.affordable = affordable; 
-    body.userEmail = req.user['username']; 
+    body.userName = req.user['username']; 
 
 
     await PurchaseItem.create((body)); 

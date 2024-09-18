@@ -14,7 +14,6 @@ import auth from './auth.js';
 import session from 'express-session';
 import user from "../mongoose/user/schema.js"; 
 
-
 console.log("here"); 
 
 
@@ -33,6 +32,7 @@ const app = express();
 app.use(session({secret:'webware'})); 
 app.use(passport.initialize()); 
 app.use(passport.session()); 
+
 app.get('/', (req, res) => { 
     res.redirect('/auth/github'); 
 }); 
@@ -75,6 +75,8 @@ app.get('/', async (req, res) =>{
 
 //gets first
 
+
+
 app.get('/auth/github',passport.authenticate('github', {scope:['user:email']})); 
 app.get('/git/callback', 
     passport.authenticate('github', {
@@ -84,7 +86,10 @@ app.get('/git/callback',
 ); 
 
 app.get('/failed',(req, res) =>  res.send('something went wrong!')); 
-app.get('/protected', isLoggedIn, (req, res) =>  res.send(req.user['username'])); 
+app.get('/protected', isLoggedIn, (req, res) =>  res.redirect('/home.html')); 
+// app.get('/home', (req, res) => { 
+//     res.sendFile(__dirname + '/index.html'); 
+// }); 
 
 
 app.use(exampleRoute); 
