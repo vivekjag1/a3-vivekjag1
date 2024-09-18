@@ -18,7 +18,7 @@
     <h1  id = "heroText" class="text-center text-5xl font-mono mt-4">Manage your budget!</h1>
     <h2 id="disclaimer" class = "text-center text-lg font-sans mt-4 italic">Note - Purchases can not have the same title</h2>
     <h2 id = "disclaimer" class = "text-center text-lg font-sans  italic">Note 2 - Do not enter dollar signs anywhere ($)</h2>
-    <div id = "displayContainer" class = "h-full w-full">
+    <div id = "displayContainer" class = "h-full w-full flex flex-row justify-between mt-5">
       <div class = "flex flex-row justify-center bg-neutral-400 h-[40rem] w-[40rem] rounded-xl ml-20">
         <form id = "budgetForm" class = "flex flex-col  items-center ">
           <h2 class=" flex flex-row mb-3 text-2xl italic font-bold">Add a purchase!</h2>
@@ -40,9 +40,8 @@
 
           <input id = "coh" value = "">
           <button type = "submit" >Submit</button>
-    
-      </form>
-    </div>
+        </form>
+      </div>
 
     <dialog id = "deleteDialog" >
       <form id = "deleteForm" class = ".customForm">
@@ -74,21 +73,23 @@
     </dialog>
 
 
-    <div class = "resultsArea" >
-        <h2 class="formHeader">View your purchases!</h2>
+    <div class = "flex flex-row justify-center bg-neutral-400 h-[40rem] w-[40rem] rounded-xl mr-20" >
+      <div class = "flex flex-col items-center">
+      <h2 class=" flex flex-row mb-3 text-2xl italic font-bold ">Results!</h2>
         
-        <table id = "resultsTable">
-          <tr> 
-            <th>Purchase Title </th>
-            <th>Category</th>
-            <th>Store</th> 
-            <th>Price</th>
-            <th>Cash on Hand</th>
-            <th>Affordable?</th>
-            <th>Edit</th>
+        <table id = "resultsTable" class="w-full text-sm text-left rtl:text-right border border-black ">
+          <tr class = "border border-black"> 
+            <th class = "border border-black">Purchase Title </th>
+            <th class = "border border-black">Category</th>
+            <th class = "border border-black">Store</th> 
+            <th class = "border border-black">Price</th>
+            <th class = "border border-black">Cash on Hand</th>
+            <th class = "border border-black">Affordable?</th>
+            <th class = "border border-black">Edit</th>
           </tr>
 
         </table>
+        </div>
       
 
 
