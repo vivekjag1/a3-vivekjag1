@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 }); 
 app.use(express.static('public')); 
 app.use(express.json()); 
-// app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
+app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
 
 const isLoggedIn = (req, res, next) => { 
     console.log('user is', req.user); 
