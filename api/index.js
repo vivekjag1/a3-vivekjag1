@@ -10,6 +10,9 @@ import getResults from "../routes/getResults.js";
 import updatePurchase from "../routes/updatePurchase.js"; 
 import deleteAll from "../routes/deleteAll.js"; 
 import cors from 'cors';
+import auth from './auth.js'; 
+import session from 'express-session';
+import user from "../mongoose/user/schema.js"; 
 
 console.log("here"); 
 
@@ -23,12 +26,50 @@ import { mongoose } from 'mongoose';
 mongoose.connect(process.env.ATLAS_URI); 
 //start express
 import express from 'express'; 
+import passport from "passport";
 const app = express(); 
+
+app.use(session({secret:'webware'})); 
+app.use(passport.initialize()); 
+app.use(passport.session()); 
+app.get('/home.html', (req, res, next) => { 
+    if(!req.user){
+        res.redirect('/auth/github'); 
+    }
+    else{ 
+       next(); 
+    }
+
+}); 
+app.get('/auth/logout', (req, res) => { 
+    const html = `
+     <!DOCTYPE html>
+     <html>
+         <head>
+             <title>Logged out</title>
+         </head>
+        <body>
+              <a href = "/auth/github">Log Back in </a>
+         </body>
+    </html>
+    
+    
+    `
+    req.logout(() => res.send(html)); 
+    
+})
+app.get('/', (req, res) => { 
+    res.redirect('/auth/github'); 
+}); 
 app.use(express.static('public')); 
 app.use(express.json()); 
 app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
 
-
+const isLoggedIn = (req, res, next) => { 
+    console.log('user is', req.user); 
+    req.user? next(): res.status(401).send(); 
+    
+}
 
 
 //middleware for post requests so that requests have a body with the incoming data
@@ -40,11 +81,13 @@ const postMiddleware = (req, res, next) => {
 
     }); 
     req.on('end', () => { 
-        
-        const json = JSON.parse(dataString); 
-        dataArr.push(json); 
-        req.body = JSON.stringify(json); 
+        if(dataString){
+            const json = JSON.parse(dataString); 
+            req.body = JSON.stringify(json); 
+           
+        }
         next(); 
+      
     })
 }
 
@@ -56,6 +99,22 @@ app.get('/', async (req, res) =>{
 //attach routes
 
 //gets first
+
+
+
+app.get('/auth/github',passport.authenticate('github', {scope:['user:email']})); 
+app.get('/git/callback', 
+    passport.authenticate('github', {
+        successRedirect:'/protected', 
+        failureRedirect: '/failed'
+    })
+); 
+
+app.get('/failed',(req, res) =>  res.send('something went wrong!')); 
+app.get('/protected', isLoggedIn, (req, res) =>  res.redirect('/home.html')); 
+// app.get('/home', (req, res) => { 
+//     res.sendFile(__dirname + '/index.html'); 
+// }); 
 
 
 app.use(exampleRoute); 

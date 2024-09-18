@@ -23,6 +23,10 @@ import {Schema, model} from 'mongoose';
     affordable:{ 
         type:Boolean, 
         required:true, 
+    }, 
+    userName:{ 
+        type:String, 
+        required:true, 
     }
 }); 
 const PurchaseItem = model('PurchaseItem', purchaseSchema); 
