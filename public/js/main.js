@@ -196,10 +196,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
 
     const logoutButton = document.getElementById('logoutButton'); 
     logoutButton.addEventListener('click', async() => { 
-      await fetch('/auth/logout', { 
-        method:'GET'
-      }); 
-  
+      window.location.href = '/auth/logout'
     })
      const form = document.getElementById('budgetForm'); 
      form.addEventListener("submit", (event) => { 
