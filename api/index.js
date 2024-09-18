@@ -29,9 +29,13 @@ mongoose.connect(process.env.ATLAS_URI);
 import express from 'express'; 
 import passport from "passport";
 const app = express(); 
+
 app.use(session({secret:'webware'})); 
 app.use(passport.initialize()); 
 app.use(passport.session()); 
+app.get('/', (req, res) => { 
+    res.redirect('/auth/github'); 
+}); 
 app.use(express.static('public')); 
 app.use(express.json()); 
 app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
