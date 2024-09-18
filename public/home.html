@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <title>CS4241 Assignment 2</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta name = "description" content = "an app for cs4241 assignment 3">
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,23 +24,23 @@
       <div class = "flex flex-row justify-center bg-neutral-400 h-[40rem] w-[40rem] rounded-xl ml-20">
         <form id = "budgetForm" class = "flex flex-col  items-center ">
           <h2 class=" flex flex-row mb-3 text-2xl italic font-bold">Add a purchase!</h2>
-          <h2 class = "flex flex-row mb-5 text-lg italic font-bold">Add a title: </h2>
-          <input id = "title" value=" ">
-          <h2 class = "flex flex-row mb-3 text-lg italic font-bold">Add a category!</h2>
+          <label for = "title" class = "flex flex-row mb-5 text-lg italic font-bold">Add a title: </label >
+          <input name = "title" id = "title" value=" " >
+          <label for = "types" class = "flex flex-row mb-3 text-lg italic font-bold">Add a category!</label>
           <select name = "types" id="types" class="w-48">
             <option value = "utilities">utilities</option>
             <option value = "groceries">groceries</option>
             <option value = "fun">Fun Money!</option>
           </select>
-          <h2 class = "flex flex-row mb-3 text-lg italic font-bold">Add the store name!: </h2>
+          <label for= "store" class = "flex flex-row mb-3 text-lg italic font-bold">Add the store name!: </label>
 
-          <input  id = "store" value = "">
-          <h2 class = "flex flex-row mb-3 text-lg italic font-bold">Add the item price!: </h2>
+          <input  name = "store" id = "store" value = "">
+          <label for = "price" class = "flex flex-row mb-3 text-lg italic font-bold">Add the item price!: </label>
 
-          <input id = "price" value = "">
-          <h2 class = "flex flex-row mb-3 text-lg italic font-bold">Add your cash on hand!: </h2>
+          <input name = "price" id = "price" value = "">
+          <label for = "coh" class = "flex flex-row mb-3 text-lg italic font-bold">Add your cash on hand!: </label>
 
-          <input id = "coh" value = "">
+          <input name = "coh" id = "coh" value = "">
           <button class = "mt-5 w-[5rem] bg-black hover:bg-blue-700 text-white font-bold py-1 px-2 rounded " type = "submit" >Submit</button>
         </form>
       </div>

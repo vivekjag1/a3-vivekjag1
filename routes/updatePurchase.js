@@ -11,12 +11,13 @@ router.post('/updatePurchase', async (req, res) =>{
         "store": body.store, 
         "price": body.price, 
         "cashOnHand": body.cashOnHand, 
+        "userName": req.user['username']
     }; 
     const affordable =   isInBudget(newPurchase); 
     newPurchase.affordable = affordable
 
 
-    const data = await PurchaseItem.findOneAndDelete({title: body.oldTitle}); 
+    const data = await PurchaseItem.findOneAndDelete({title: body.oldTitle, userName:req.user['username']}); 
     const newData = await PurchaseItem.create(newPurchase); 
     const allResults = await PurchaseItem.find(); 
 
