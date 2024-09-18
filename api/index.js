@@ -12,6 +12,7 @@ import deleteAll from "../routes/deleteAll.js";
 import cors from 'cors';
 import auth from './auth.js'; 
 import session from 'express-session';
+import user from "../mongoose/user/schema.js"; 
 
 
 console.log("here"); 
@@ -36,7 +37,9 @@ app.use(express.json());
 app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
 
 const isLoggedIn = (req, res, next) => { 
+    console.log('user is', req.user); 
     req.user? next(): res.status(401).send(); 
+    
 }
 
 
@@ -49,11 +52,13 @@ const postMiddleware = (req, res, next) => {
 
     }); 
     req.on('end', () => { 
-        
-        const json = JSON.parse(dataString); 
-        dataArr.push(json); 
-        req.body = JSON.stringify(json); 
+        if(dataString){
+            const json = JSON.parse(dataString); 
+            req.body = JSON.stringify(json); 
+           
+        }
         next(); 
+      
     })
 }
 
@@ -75,7 +80,7 @@ app.get('/git/callback',
 ); 
 
 app.get('/failed',(req, res) =>  res.send('something went wrong!')); 
-app.get('/protected', isLoggedIn, (req, res) =>  res.send('worked')); 
+app.get('/protected', isLoggedIn, (req, res) =>  res.send(req.user['username'])); 
 
 
 app.use(exampleRoute); 
