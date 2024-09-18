@@ -110,6 +110,10 @@ const handleSubmit = async(title, type, store, price, coh) => {
         editButton.innerHTML = 'update Item'; 
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'delete item'; 
+        editButton.style.backgroundColor = 'black'; 
+        editButton.style.color = 'white'; 
+        deleteButton.style.backgroundColor = 'red'; 
+        deleteButton.style.color = 'white';
         
         resultRow.appendChild(resultTitle); 
         resultRow.appendChild(resultCategory); 
@@ -178,9 +182,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
   
   
   window.onload =  function() {
-    const modal = document.getElementById('deleteDialog'); 
-    modal.showModal(); 
-    //logic for creating a new item 
+
      const form = document.getElementById('budgetForm'); 
      form.addEventListener("submit", (event) => { 
       event.preventDefault(); 
