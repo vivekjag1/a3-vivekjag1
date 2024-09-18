@@ -120,7 +120,10 @@ const handleSubmit = async(title, type, store, price, coh) => {
         editButton.style.backgroundColor = 'black'; 
         editButton.style.color = 'white'; 
         deleteButton.style.backgroundColor = 'red'; 
-        deleteButton.style.color = 'white';
+        deleteButton.style.color = 'black';
+        editButton.style.marginRight = '2rem'; 
+        deleteButton.style.marginLeft = '2rem'; 
+
           
         resultRow.appendChild(resultTitle); 
         resultRow.appendChild(resultCategory); 
