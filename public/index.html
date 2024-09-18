@@ -39,32 +39,36 @@
           <h2 class = "flex flex-row mb-3 text-lg italic font-bold">Add your cash on hand!: </h2>
 
           <input id = "coh" value = "">
-          <button type = "submit" >Submit</button>
+          <button class = "mt-5 w-[5rem] bg-black hover:bg-blue-700 text-white font-bold py-1 px-2 rounded " type = "submit" >Submit</button>
         </form>
       </div>
 
-    <dialog id = "deleteDialog" >
-      <form id = "deleteForm" class = ".customForm">
-        <h2 class="formHeader">Delete/modify a purchase!</h2>
+    <dialog id = "deleteDialog" class = "bg-neutral-200 text-lg font-mono w-[20rem]  rounded-xl backdrop:backdrop-blur-sm">
+      <form id = "deleteForm" class = "flex flex-col  items-center w-[20rem] ">
+        <h2 class="font-bold text-2xl text-center">Delete/modify a purchase!</h2>
         <h2 class = "formHeader">Title: </h2>
-          <input id = "updatetitle" value="title">
+          <input id = "updatetitle" value="">
         <h2 class = "formHeader">Category</h2>
-        <select name = "types" id="updatetypes">
+        <select name = "types" class = "w-48" id="updatetypes">
           <option value = "utilities">utilities</option>
           <option value = "groceries">groceries</option>
           <option value = "fun">Fun Money!</option>
         </select>
         <h2 class = "formHeader">Store:  </h2>
 
-        <input  id = "updatestore" value = "Enter the store name!">
+        <input  id = "updatestore" value = "">
         <h2 class = "formHeader">Price </h2>
 
-        <input id = "updateprice" value = "Enter the price!">
+        <input id = "updateprice" value = "">
         <h2 class = "formHeader">Cash On Hand </h2>
 
-        <input id = "updatecoh" value = "Enter your cash on hand!">
-        <button id = "submitUpdates"  type = "button" >Submit Updates</button>
-        <button id = "deletePurchase"  type = "button" >Delete</button>
+        <input id = "updatecoh" value = "">
+        <div class = "flex flex-row mb-10">
+          <button id = "deletePurchase"  class = " mt-5 w-[5rem] bg-red-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-5" type = "button" >Delete</button>
+          <button id = "submitUpdates"  class = "mt-5 w-[5rem] bg-black hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ml-5" type = "button" >Submit Updates</button>
+
+        </div>
+        
       
 
   
