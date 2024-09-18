@@ -32,7 +32,32 @@ const app = express();
 app.use(session({secret:'webware'})); 
 app.use(passport.initialize()); 
 app.use(passport.session()); 
+app.get('/home.html', (req, res, next) => { 
+    if(!req.user){
+        res.redirect('/auth/github'); 
+    }
+    else{ 
+       next(); 
+    }
 
+}); 
+app.get('/auth/logout', (req, res) => { 
+    const html = `
+     <!DOCTYPE html>
+     <html>
+         <head>
+             <title>Logged out</title>
+         </head>
+        <body>
+              <a href = "/auth/github">Log Back in </a>
+         </body>
+    </html>
+    
+    
+    `
+    req.logout(() => res.send(html)); 
+    
+})
 app.get('/', (req, res) => { 
     res.redirect('/auth/github'); 
 }); 

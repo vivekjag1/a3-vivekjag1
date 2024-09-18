@@ -12,6 +12,13 @@ const handleSubmit = async(title, type, store, price, coh) => {
     })).json(); 
     buildTable(getResults["data"], 'dummy'); 
   }
+  const makeInitialTable = async () => { 
+    console.log("called"); 
+    const results = await( await fetch('/getResults', { 
+      method:'GET'
+    })).json(); 
+    buildTable(results["data"], 'dummy'); 
+  } 
 
   
   const handleDelete = async (title) => {
@@ -182,6 +189,8 @@ const handleSubmit = async(title, type, store, price, coh) => {
   
   
   window.onload =  function() {
+    makeInitialTable().then(); 
+
 
      const form = document.getElementById('budgetForm'); 
      form.addEventListener("submit", (event) => { 
