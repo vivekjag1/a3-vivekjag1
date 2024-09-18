@@ -10,6 +10,9 @@ import getResults from "../routes/getResults.js";
 import updatePurchase from "../routes/updatePurchase.js"; 
 import deleteAll from "../routes/deleteAll.js"; 
 import cors from 'cors';
+import auth from './auth.js'; 
+import session from 'express-session';
+
 
 console.log("here"); 
 
@@ -23,12 +26,18 @@ import { mongoose } from 'mongoose';
 mongoose.connect(process.env.ATLAS_URI); 
 //start express
 import express from 'express'; 
+import passport from "passport";
 const app = express(); 
+app.use(session({secret:'webware'})); 
+app.use(passport.initialize()); 
+app.use(passport.session()); 
 app.use(express.static('public')); 
 app.use(express.json()); 
 app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
 
-
+const isLoggedIn = (req, res, next) => { 
+    req.user? next(): res.status(401).send(); 
+}
 
 
 //middleware for post requests so that requests have a body with the incoming data
@@ -56,6 +65,17 @@ app.get('/', async (req, res) =>{
 //attach routes
 
 //gets first
+
+app.get('/auth/github',passport.authenticate('github', {scope:['user:email']})); 
+app.get('/git/callback', 
+    passport.authenticate('github', {
+        successRedirect:'/protected', 
+        failureRedirect: '/failed'
+    })
+); 
+
+app.get('/failed',(req, res) =>  res.send('something went wrong!')); 
+app.get('/protected', isLoggedIn, (req, res) =>  res.send('worked')); 
 
 
 app.use(exampleRoute); 
