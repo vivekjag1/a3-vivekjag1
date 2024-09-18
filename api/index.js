@@ -2,13 +2,13 @@
 Note -> all express routes are written in the routes directory. This file only serves the right route for the given HTTP request 
 */ 
 //import routes
-import PurchaseItem from "./mongoose/purchases/schema.js"; 
-import exampleRoute from "./routes/exampleRoute.js"; 
-import addPurchase from "./routes/addPurchase.js"; 
-import deletePurchase from "./routes/deletePurchase.js"; 
-import getResults from "./routes/getResults.js"; 
-import updatePurchase from "./routes/updatePurchase.js"; 
-import deleteAll from "./routes/deleteAll.js"; 
+import PurchaseItem from "../mongoose/purchases/schema.js"; 
+import exampleRoute from "../routes/exampleRoute.js"; 
+import addPurchase from "../routes/addPurchase.js"; 
+import deletePurchase from "../routes/deletePurchase.js"; 
+import getResults from "../routes/getResults.js"; 
+import updatePurchase from "../routes/updatePurchase.js"; 
+import deleteAll from "../routes/deleteAll.js"; 
 import cors from 'cors';
 
 console.log("here"); 

@@ -5,7 +5,7 @@
   "author": "",
   "type": "module",
   "scripts": {
-    "start": "node server.js && npx tailwindcss -i ./public/css/main.css -o ./public/css/output.css"
+    "start": "node ./api/index.js && npx tailwindcss -i ./public/css/main.css -o ./public/css/output.css"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
