@@ -61,7 +61,7 @@ app.use(exampleRoute);
 app.use(getResults); 
 app.use(deleteAll); 
 
- 
+app.use(postMiddleware); 
 
 app.use(addPurchase); 
 app.use(deletePurchase); 
