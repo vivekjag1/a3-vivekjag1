@@ -14,7 +14,7 @@ Made by Vivek Jagadeesh for CS 4241 -- https://a3-vivekjag1.vercel.app/
 3. Refactoring the entire backend to work with express
 ## Use of mongoose
 - I used mongoose for this app. I think that the mongoose object wrapper is better than the node drivers and I hate working with schema-less databases. 
-
+  
 ## Authentication method 
 1. I used OAuth via Passport.js with "sign in with GitHub". I chose passport for a couple of reasons: 
     1. I have used passport in my personal coding projects. 
