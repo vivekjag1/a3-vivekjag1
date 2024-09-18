@@ -9,7 +9,7 @@ import deletePurchase from "./routes/deletePurchase.js";
 import getResults from "./routes/getResults.js"; 
 import updatePurchase from "./routes/updatePurchase.js"; 
 import deleteAll from "./routes/deleteAll.js"; 
-
+import cors from 'cors';
 
 
 
@@ -26,6 +26,7 @@ import express from 'express';
 const app = express(); 
 app.use(express.static('public')); 
 app.use(express.json()); 
+app.use(cors({origin:'https://a3-vivekjag1.vercel.app/'})); 
 
 
 
