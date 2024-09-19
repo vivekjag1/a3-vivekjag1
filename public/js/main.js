@@ -189,7 +189,7 @@ const handleSubmit = async(title, type, store, price, coh) => {
 
   }
   
-  
+     
   
   window.onload =  function() {
     makeInitialTable().then(); 
